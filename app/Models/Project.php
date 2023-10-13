@@ -15,4 +15,8 @@ class Project extends Model
         "image",
         "slug"
     ];
+
+    public function types() {
+        return $this->belongsTo(Type::class); //un projects appartiene a una tipologia
+    }
 }
