@@ -23,6 +23,16 @@
             @enderror
         </div>
 
+        {{-- tipo --}}
+        <div class="mb-3">
+            <label class="form-label">Tipologia</label>
+            <select class="form-select" name="type_id">
+                @foreach ($types as $type)
+                    <option value="{{ $type->id }}">{{$type->type}}</option>
+                @endforeach
+            </select>
+        </div>
+
         {{-- descrizione --}}
         <div class="mb-3">
             <label class="form-label @error('description') is-invalid @enderror">Description</label>

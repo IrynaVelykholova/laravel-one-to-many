@@ -9,13 +9,12 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
+    public function up(): void {
         Schema::table('projects', function (Blueprint $table) {
             $table->unsignedBigInteger('type_id')->nullable()->after('slug'); //perchè esiste già tabella projects
-            $table->foreign('type_id')
-            ->references('id')
-            ->on("types") //fa riferimento tabella
+            $table->foreign('type_id') //rendo user_id una foreign key
+            ->references('id')//fa riferimento alla colonna id
+            ->on("types") //fa riferimento tabella types
             ->onDelete("set null");
         });
     }

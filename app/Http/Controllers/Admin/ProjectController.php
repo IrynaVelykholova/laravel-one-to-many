@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProjectUpsertRequest;
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,7 +23,8 @@ class ProjectController extends Controller
     }
 
     public function create() {
-        return view('admin.projects.create');
+        $types = Type::all();
+        return view('admin.projects.create', ["types" => $types]); //secondo argomento types
     }
 
     public function store(ProjectUpsertRequest $request) {
@@ -39,7 +41,9 @@ class ProjectController extends Controller
 
     public function edit($slug) {
         $project = Project::where("slug", $slug)->firstOrFail();
-        return view('admin.projects.edit', ['project' => $project]);
+        $types = Type::all();
+
+        return view('admin.projects.edit', compact("project", "types"));
     }
 
     public function update(ProjectUpsertRequest $request, $slug) {//va passato l'id come secondo argomento
